@@ -1,5 +1,3 @@
-ARG BASE_IMAGE
-
 FROM alpine:3.12.0 AS builder
 
 WORKDIR /build
