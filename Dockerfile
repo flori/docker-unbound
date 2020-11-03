@@ -1,4 +1,4 @@
-FROM alpine:3.12.0 AS builder
+FROM alpine:3.12.1 AS builder
 
 WORKDIR /build
 
@@ -21,7 +21,7 @@ RUN make -j`getconf _NPROCESSORS_ONLN`
 
 RUN cp unbound /bin/unbound
 
-FROM alpine:3.12.0 AS runner
+FROM alpine:3.12.1 AS runner
 
 COPY --from=builder /bin/unbound /bin/unbound
 
