@@ -10,7 +10,6 @@ build-info:
 	@echo $(DOCKER_IMAGE)
 
 build:
-	git tag $(DOCKER_IMAGE_VERSION)
 	docker build --pull -t $(DOCKER_IMAGE) -t $(DOCKER_IMAGE_LATEST) .
 	@$(MAKE) build-info
 
@@ -21,3 +20,9 @@ push: build
 push-latest: push
 	docker tag ${DOCKER_IMAGE} ${REMOTE_LATEST_TAG}
 	docker push ${REMOTE_LATEST_TAG}
+
+git-tag:
+	git tag $(DOCKER_IMAGE_VERSION)
+	git push origin
+	git push origin $(DOCKER_IMAGE_VERSION)
+
