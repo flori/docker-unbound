@@ -1,9 +1,9 @@
-FROM alpine:3.12.3 AS builder
+FROM alpine:3.15 AS builder
 
 WORKDIR /build
 
-ARG UNBOUND_SHA=a954043a95b0326ca4037e50dace1f3a207a0a19e9a4a22f4c6718fc623db2a1
-ARG UNBOUND=unbound-1.13.0
+ARG UNBOUND_SHA=a480dc6c8937447b98d161fe911ffc76cfaffa2da18788781314e81339f1126f
+ARG UNBOUND=unbound-1.15.0
 
 RUN apk add --no-cache curl build-base openssl-dev expat-dev
 
@@ -21,7 +21,7 @@ RUN make -j`getconf _NPROCESSORS_ONLN`
 
 RUN cp unbound /bin/unbound
 
-FROM alpine:3.12.3 AS runner
+FROM alpine:3.15 AS runner
 
 COPY --from=builder /bin/unbound /bin/unbound
 
