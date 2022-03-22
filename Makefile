@@ -13,3 +13,11 @@ build:
 	git tag $(DOCKER_IMAGE_VERSION)
 	docker build --pull -t $(DOCKER_IMAGE) -t $(DOCKER_IMAGE_LATEST) .
 	@$(MAKE) build-info
+
+push: build
+	docker tag $(DOCKER_IMAGE) $(REMOTE_TAG)
+	docker push $(REMOTE_TAG)
+
+push-latest: push
+	docker tag ${DOCKER_IMAGE} ${REMOTE_LATEST_TAG}
+	docker push ${REMOTE_LATEST_TAG}
