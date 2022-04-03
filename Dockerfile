@@ -21,11 +21,14 @@ RUN make -j`getconf _NPROCESSORS_ONLN`
 
 RUN cp unbound /bin/unbound
 
+RUN adduser -g unbound -D -s /bin/sh unbound
+
 FROM alpine:3.15 AS runner
 
-COPY --from=builder /bin/unbound /bin/unbound
+COPY --from=builder /etc/passwd /etc/passwd
+COPY --from=builder /etc/group /etc/group
 
-RUN adduser -g unbound -D -s /bin/sh unbound
+COPY --from=builder /bin/unbound /bin/unbound
 
 EXPOSE 53/udp 53/tcp
 
