@@ -1,9 +1,9 @@
-FROM alpine:3.15 AS builder
+FROM alpine:3.16 AS builder
 
 WORKDIR /build
 
-ARG UNBOUND_SHA=a480dc6c8937447b98d161fe911ffc76cfaffa2da18788781314e81339f1126f
-ARG UNBOUND=unbound-1.15.0
+ARG UNBOUND_SHA=6701534c938eb019626601191edc6d012fc534c09d2418d5b92827db0cbe48a5
+ARG UNBOUND=unbound-1.16.0
 
 RUN apk add --no-cache curl build-base openssl-dev expat-dev
 
@@ -23,7 +23,7 @@ RUN cp unbound /bin/unbound
 
 RUN adduser -g unbound -D -s /bin/sh unbound
 
-FROM alpine:3.15 AS runner
+FROM alpine:3.16 AS runner
 
 COPY --from=builder /etc/passwd /etc/passwd
 COPY --from=builder /etc/group /etc/group
