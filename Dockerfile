@@ -17,7 +17,7 @@ WORKDIR /build/${UNBOUND}
 
 RUN ./configure --prefix=''
 
-RUN make -j`getconf _NPROCESSORS_ONLN`
+RUN make -j $(getconf _NPROCESSORS_ONLN)
 
 RUN cp unbound /bin/unbound
 
