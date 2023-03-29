@@ -2,8 +2,8 @@ FROM alpine:3.16 AS builder
 
 WORKDIR /build
 
-ARG UNBOUND_SHA=dcbc95d7891d9f910c66e4edc9f1f2fde4dea2eec18e3af9f75aed44a02f1341
-ARG UNBOUND=unbound-1.17.0
+ARG UNBOUND_SHA=ee4085cecce12584e600f3d814a28fa822dfaacec1f94c84bfd67f8a5571a5f4
+ARG UNBOUND=unbound-1.17.1
 
 RUN apk add --no-cache curl build-base openssl-dev expat-dev
 
