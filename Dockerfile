@@ -1,4 +1,4 @@
-FROM alpine:3.16 AS builder
+FROM alpine:3.18 AS builder
 
 WORKDIR /build
 
@@ -23,7 +23,7 @@ RUN cp unbound /bin/unbound
 
 RUN adduser -g unbound -D -s /bin/sh unbound
 
-FROM alpine:3.16 AS runner
+FROM alpine:3.18 AS runner
 
 COPY --from=builder /etc/passwd /etc/passwd
 COPY --from=builder /etc/group /etc/group
