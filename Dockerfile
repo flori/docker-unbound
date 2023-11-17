@@ -2,14 +2,12 @@ FROM alpine:3.18 AS builder
 
 WORKDIR /build
 
-ARG UNBOUND_SHA=ee4085cecce12584e600f3d814a28fa822dfaacec1f94c84bfd67f8a5571a5f4
-ARG UNBOUND=unbound-1.17.1
+ARG UNBOUND_SHA=a97532468854c61c2de48ca4170de854fd3bc95c8043bb0cfb0fe26605966624
+ARG UNBOUND=unbound-1.19.0
 
 RUN apk add --no-cache curl build-base openssl-dev expat-dev
 
-RUN curl -sO https://nlnetlabs.nl/downloads/unbound/${UNBOUND}.tar.gz
-
-RUN test ${UNBOUND_SHA} = `sha256sum ${UNBOUND}.tar.gz | cut -d' ' -f1`
+ADD --checksum=sha256:${UNBOUND_SHA} https://nlnetlabs.nl/downloads/unbound/${UNBOUND}.tar.gz "${UNBOUND}.tar.gz"
 
 RUN tar xzf "${UNBOUND}.tar.gz"
 

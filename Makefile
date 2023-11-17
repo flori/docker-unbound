@@ -10,6 +10,7 @@ build:
 	docker buildx use unbound-builder
 	docker buildx inspect --bootstrap
 	docker buildx build --platform linux/amd64,linux/arm64 --pull --push -t $(DOCKER_USER)/$(DOCKER_IMAGE_NAME) -t $(DOCKER_USER)/$(DOCKER_IMAGE_NAME):$(DOCKER_IMAGE_VERSION) .
+	docker buildx use default
 
 git-tag:
 	git tag $(DOCKER_IMAGE_VERSION)
